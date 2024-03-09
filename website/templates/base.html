@@ -13,13 +13,32 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar">
-            <div class="navbar-nav ms-3">
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="register" href="/register">Sign Up</a>
-                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-                <a class="nav-item nav-link" id="home" href="/">Home</a>
-            </div>
+        <div class="collapse navbar-collapse" id="navbar"> 
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item ms-4">
+                    <a class="nav-item nav-link" id="home" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" id="logout" href="/settings">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                </li>
+            </ul>
+            <span class="navbar-text text-white me-3">
+            Welcome, {{ user.first_name }}
+            </span>
+            {% else %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item ms-4">
+                    <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                </li>
+                <li>
+                    <a class="nav-item nav-link" id="register" href="/register">Sign Up</a>
+                </li>
+            </ul>
+            {% endif %}
         </div>
     </nav>
     <!-- Handle all the flashes -->
@@ -41,7 +60,7 @@
     {% endif %}
     {% endwith %}
 
-    <div class="container">
+    <div class="container" style="width:50%; margin-left:25%;">
     {% block content %}
     {% endblock %}
     </div>
@@ -49,6 +68,6 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Load the url of the file path -->
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script> -->
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
