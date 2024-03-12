@@ -1,7 +1,7 @@
-from flask import Flask, url_for, request, render_template, redirect, abort
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
+
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -37,5 +37,3 @@ def create_app():
         return User.query.get(int(id))
 
     return app
-
-
